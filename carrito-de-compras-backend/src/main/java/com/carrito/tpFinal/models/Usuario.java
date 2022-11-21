@@ -38,14 +38,12 @@ public class Usuario implements Serializable {
 	@Column(name = "activo")
 	private boolean estaLogueado = false;
 	
-	  @OneToOne(mappedBy = "cliente")
-	  private Carrito carrito;
+	  //@OneToOne(mappedBy = "cliente",fetch = FetchType.LAZY)
+	  //private Carrito carrito;
 	
 
 	public Usuario() {
 	}
-
-
 
 	public Usuario(int id, @NotBlank @NotNull String usuario, @NotBlank @NotNull String password,
 			@NotBlank @NotNull String email, Rol rol, boolean estaLogueado) {
@@ -56,8 +54,6 @@ public class Usuario implements Serializable {
 		this.rol = rol;
 		this.estaLogueado = estaLogueado;
 	}
-
-
 
 	public int getId() {
 		return id;

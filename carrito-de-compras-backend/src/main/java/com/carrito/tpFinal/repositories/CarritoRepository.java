@@ -11,9 +11,5 @@ import com.carrito.tpFinal.models.Carrito;
 public interface CarritoRepository extends JpaRepository<Carrito, Integer> {
 	
 	List<Carrito> findByCliente_Id(int clientId);
-	List<Carrito> findByCliente_Usuario(String usuario);
-	void deleteByCliente_Id(int clientId);
-	Long countByCliente_Id(int id);
-	
-//	void deleteByArticulo_CodArticulo(int id);
+	List<Carrito> findByCliente_Usuario(String usuario);	
 }

@@ -1,6 +1,5 @@
 package com.carrito.tpFinal.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,10 +20,10 @@ public class Carrito {
 	private int id;
 
 	@OneToMany
-	private List<Articulo> articulos;/* = new ArrayList<>();*/
+	private List<Articulo> articulos;
 
 	
-	 @OneToOne(cascade = CascadeType.MERGE)
+	 @OneToOne(cascade = CascadeType.REFRESH)
 	 @JoinColumn(name = "usuario_id", referencedColumnName = "id")
 	private Usuario cliente;
 
@@ -34,18 +33,10 @@ public class Carrito {
 	public Carrito() {
 	}
 
-	public Carrito(int id,  Usuario cliente/*, @NotNull int monto*/) {
-		this.id = id;
-		//this.monto = monto;
-		this.cliente=cliente;
-	}
-	
-
-	public Carrito(int id, List<Articulo> articulos, Usuario cliente/*, @NotNull int monto*/) {
+	public Carrito(int id, List<Articulo> articulos/*, Usuario cliente*/) {
 		this.id = id;
 		this.articulos = articulos;
-		this.cliente = cliente;
-		/*this.monto = monto;*/
+		/*this.cliente = cliente;*/
 	}
 
 	public int getId() {
@@ -83,8 +74,10 @@ public class Carrito {
 
 	@Override
 	public String toString() {
-		return "Carrito [id=" + id + ", monto=" + monto + "]";
+		return "Carrito [id=" + id + ", articulos=" + articulos + ", cliente=" + cliente + ", monto=" + monto + "]";
 	}
+
+
 	
 	
 }

@@ -17,19 +17,6 @@ public class ArticuloService {
 	@Autowired
 	private ArticuloRepository articuloRepository;
 
-	/*
-	public List<Articulo> getRelatedArticulos(String category, String ArticuloId) {
-		List<Articulo> ArticuloList = this.ArticuloRepository.findByCategoryAndIdNot(category, ArticuloId);
-		List<Articulo> randomArticulos = new ArrayList<>();
-		Random random = new Random();
-		for (int i = 0; i < 2; i++) {
-			int randomIndex = random.nextInt(ArticuloList.size());
-			randomArticulos.add(ArticuloList.get(randomIndex));
-			ArticuloList.remove(randomIndex);
-		}
-		return randomArticulos;
-	}*/
-
 	public void guardarArticulo(Articulo articulo) {
 		System.out.println("Articulo Alta: "+articulo);
 		this.articuloRepository.save(articulo);

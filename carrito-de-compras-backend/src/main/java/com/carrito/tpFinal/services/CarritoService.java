@@ -1,5 +1,6 @@
 package com.carrito.tpFinal.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.carrito.tpFinal.models.Articulo;
 import com.carrito.tpFinal.models.Carrito;
+import com.carrito.tpFinal.models.Factura;
 import com.carrito.tpFinal.repositories.CarritoRepository;
+import com.carrito.tpFinal.repositories.FacturaRepository;
 
 @Service
 @Transactional
@@ -18,22 +21,13 @@ public class CarritoService {
 	
 	@Autowired
 	private ArticuloService articuloService;
+	
+	@Autowired
+	private FacturaRepository facturaRepository;
 
-	public List<Carrito> getListByClient(/*String userName*/) {
-		//return this.carritoRepository.findByCliente_Usuario(/*userName*/);
+	public List<Carrito> listar() {
 		return this.carritoRepository.findAll();
 	}
-
-	public void cleanShoppingCart(int clientId) {
-		this.carritoRepository.deleteByCliente_Id(clientId);
-	}
-
-	/*
-	 * public void removeProduct(int id) {
-	 * this.carritoRepository.deleteByArticulo_CodArticulo(id);
-	 * 
-	 * //this.carritoRepository.deleteById(id); }
-	 */
 
 	public void addProduct(Carrito shoppingCart) {
 		List<Articulo> lista = shoppingCart.getArticulos();
@@ -51,16 +45,22 @@ public class CarritoService {
 			int cantidad = (int) (p.getPrecio()/ a.getPrecio());
 			a.setStock(a.getStock() - cantidad);
 			
-			//System.out.println(a.getStock());
 			this.articuloService.guardarArticulo(a);
 		});
 				
-		System.out.println(monto);		
 		shoppingCart.setMonto(monto);
+		
 		this.carritoRepository.save(shoppingCart);
+		
+		// aca genero el detalle
+		Factura factura = new Factura();
+		factura.setFecha(new Date());
+		//factura.setUsuario(shoppingCart.getCliente());
+		factura.setCarrito(shoppingCart);
+		factura.setTotal(monto);
+		
+		System.out.println(factura);
+		this.facturaRepository.save(factura);	
 	}
-
-	public Long getCountByClient(int clientId) {
-		return this.carritoRepository.countByCliente_Id(clientId);
-	}
+	
 }

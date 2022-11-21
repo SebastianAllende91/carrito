@@ -8,16 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.carrito.tpFinal.models.Carrito;
-import com.carrito.tpFinal.models.Mensaje;
 import com.carrito.tpFinal.services.CarritoService;
 
 @RestController
@@ -29,15 +26,9 @@ public class CarritoController {
 	private CarritoService carritoService;
 	
 	@GetMapping("/carrito")
-	public ResponseEntity<List<Carrito>> getListByClient(/*@RequestBody Usuario user*/){
-		/*String userName = user.getUsuario();*/
-		return new ResponseEntity<>(this.carritoService.getListByClient(/*userName*/),HttpStatus.OK);
-	}
-	
-	
-	@GetMapping("/carrito/cantidad/{id}")
-	public ResponseEntity<Long> countByCliente(@PathVariable("id") int id){
-		return new ResponseEntity<>(this.carritoService.getCountByClient(id),HttpStatus.OK);
+	public ResponseEntity<List<Carrito>> listar(){
+		
+		return new ResponseEntity<>(this.carritoService.listar(),HttpStatus.OK);
 	}
 	
 	@PostMapping("/carrito")
@@ -49,12 +40,13 @@ public class CarritoController {
 		return new ResponseEntity<>(carrito,HttpStatus.OK);
 	}
 	
+	/*
 	@DeleteMapping("/carrito/limpiar/{id}")
 	public ResponseEntity<Mensaje> limpiarProducto(@PathVariable("id")int id){
 		
 		
-		//this.carritoService.removeProduct(id);
+		this.carritoService.vaciarCarrito(id);
 		return new ResponseEntity<>(new Mensaje("Eliminado"),HttpStatus.OK);
 	}
-	
+	*/
 }
