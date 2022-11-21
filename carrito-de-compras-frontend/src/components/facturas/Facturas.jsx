@@ -36,14 +36,6 @@ const Facturas = () => {
         <div className="section-title" data-aos="fade-left">
           <h2>Facturas</h2>
         </div>
-        <div className="d-flex justify-content-end ">
-          <button
-            className="btn btn-success"
-            onClick={() => navigate("/crear")}
-          >
-            Alta de Usuarios
-          </button>
-        </div>
         <table className="table align-middle mb-0 bg-white">
           <thead className="bg-light">
             <tr>
