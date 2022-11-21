@@ -48,8 +48,6 @@ const articleGetById = (payload) => ({
 
 export const addToCarrito = (el) => async (dispatch) => {
   try {
-    // const { data } = await ArticlesServices.addCarrito(el);
-
     Swal.fire({
       icon: "success",
       title: "Ok...",
@@ -85,3 +83,27 @@ export const itemToDelete = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const addInvoice = (values) => async (dispatch) => {
+  try {
+    console.log(values);
+    const data = await ArticlesServices.addInvoice(values);
+
+    console.log(data);
+    if (data.status) {
+      Swal.fire({
+        icon: "success",
+        title: "Ok...",
+        text: `Compra exitosa!`,
+      });
+    }
+    dispatch(processingInvoice(data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const processingInvoice = (payload) => ({
+  type: TYPES.ADD_INVOICE,
+  payload,
+});

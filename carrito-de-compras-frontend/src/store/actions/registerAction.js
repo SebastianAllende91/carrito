@@ -6,12 +6,13 @@ export const register = (data) => async (dispatch) => {
     const resp = await RegisterServices.userRegister(data);
 
     console.log(resp);
-
-    Swal.fire({
-      icon: "success",
-      title: "OK...",
-      text: "Registro exitoso!",
-    });
+    if (resp.status) {
+      Swal.fire({
+        icon: "success",
+        title: "OK...",
+        text: "Registro exitoso!",
+      });
+    }
   } catch (error) {
     console.log("Error en login Action: ", error);
     Swal.fire({

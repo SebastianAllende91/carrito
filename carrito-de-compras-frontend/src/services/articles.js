@@ -7,9 +7,8 @@ const ArticlesServices = {
   addProduct: (value) => api.post("/agregarArticulo", value),
   editProduct: (id, value) => api.put(`/editarArticulo/${id}`, value),
   deleteProduct: (id) => api.delete(`/eliminarArticulo/${id}`),
-  addCarrito: (value) => api.post("/carrito", value),
-  deleteItemToCard: (id) => api.delete(`/carrito/limpiar/${id}`),
-  // getAllCart: () => api.get("/carrito"),
+  addInvoice: (value) => api.post("/carrito", value),
+  finishOrder: (id) => api.delete(`/carrito/limpiar/${id}`),
 };
 
 export default ArticlesServices;

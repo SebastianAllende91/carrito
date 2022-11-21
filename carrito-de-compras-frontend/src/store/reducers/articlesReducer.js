@@ -45,7 +45,7 @@ const ArticlesReducer = (state = initialState, action) => {
             ...state,
             carrito: state.carrito.map((el) =>
               el.codArticulo === articulo.codArticulo
-                ? { ...el, monto: el.monto + monto }
+                ? { ...el, monto: el.precio + monto }
                 : { el }
             ),
           }
@@ -61,6 +61,12 @@ const ArticlesReducer = (state = initialState, action) => {
         carrito: state.carrito.filter(
           (item) => item.codArticulo !== action.payload
         ),
+      };
+    }
+    case TYPES.ADD_INVOICE: {
+      return {
+        ...state,
+        carrito: [],
       };
     }
 

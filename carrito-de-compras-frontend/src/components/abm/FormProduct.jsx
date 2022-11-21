@@ -11,7 +11,7 @@ const FormProduct = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-
+  console.log(articleSelect);
   const [newName, setNewName] = useState(articleSelect.nombre || "");
   const [newDescription, setNewDescription] = useState(
     articleSelect.descripcion || ""
@@ -108,6 +108,7 @@ const FormProduct = () => {
         nombre: newName,
         descripcion: newDescription,
         categoria: articleSelect.categoria,
+        imagen: articleSelect.imagen,
         stock: newStock,
         precio: newPrecio,
       };
@@ -140,6 +141,7 @@ const FormProduct = () => {
       newPrecio,
       newStock,
       articleSelect.categoria,
+      articleSelect.imagen,
       navigate,
     ]
   );

@@ -4,6 +4,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import {
   ABM_PRODUCTS,
   ABM_USERS,
+  FACTURAS,
   HOME,
   LOGIN,
   SHOP_CART,
@@ -78,6 +79,11 @@ const Navbar = () => {
                             to={ABM_PRODUCTS}
                           >
                             Abm Productos
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink className="nav-link scrollto" to={FACTURAS}>
+                            Pedidos
                           </NavLink>
                         </li>
                       </>

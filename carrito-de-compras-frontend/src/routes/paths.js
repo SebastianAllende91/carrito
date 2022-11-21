@@ -11,3 +11,4 @@ export const ADD_PRODUCT = "/alta";
 export const ADD_USER = "/crear";
 export const USER_EDIT = "/editarUsuario";
 export const SHOP_CART = "/carrito";
+export const FACTURAS = "/facturas";

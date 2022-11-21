@@ -14,6 +14,7 @@ import {
   ADD_PRODUCT,
   ADD_USER,
   EDIT,
+  FACTURAS,
   HOME,
   ID,
   LOGIN,
@@ -30,6 +31,7 @@ import ShoppingCart from "../views/ShoppingCart";
 import AbmUsers from "../views/AbmUsers";
 import AltaUsuario from "../components/abm/AltaUsuario";
 import EditUser from "../components/abm/EditUser";
+import Facturas from "../components/facturas/Facturas";
 
 const MainRoute = () => {
   return (
@@ -51,6 +53,7 @@ const MainRoute = () => {
           <Route path={ADD_PRODUCT} element={<AltaProduct />} />
           <Route path={ADD_USER} element={<AltaUsuario />} />
           <Route path={USER_EDIT + ID} element={<EditUser />} />
+          <Route path={FACTURAS} element={<Facturas />} />
         </Route>
         <Route path="*" element={<div>Not Found!!</div>} />
       </Routes>

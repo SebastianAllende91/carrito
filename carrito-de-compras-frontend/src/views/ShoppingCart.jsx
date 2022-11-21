@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { itemToDelete } from "../store/actions/articlesAction";
+import { addInvoice, itemToDelete } from "../store/actions/articlesAction";
 import imgDefault from "../assets/images/a.webp";
 import MediosDePago from "../components/MediosDePago";
 
 const ShoppingCart = () => {
   const dispacth = useDispatch();
   const { carrito } = useSelector((state) => state.ArticlesReducer);
+  const { user } = useSelector((state) => state.LoginReducer);
 
   let total = carrito
     ?.map((el) => el.monto)
@@ -17,7 +18,11 @@ const ShoppingCart = () => {
   useEffect(() => {}, [carrito]);
 
   const handleDelete = (id) => dispacth(itemToDelete(id));
-  const finishSale = () => {};
+
+  const finish = useCallback(() => {
+    let a = carrito.map((el) => ({ ...el, precio: el.monto }));
+    dispacth(addInvoice({ cliente: user, articulos: a }));
+  }, [carrito, dispacth, user]);
 
   return (
     <main id="main">
@@ -103,7 +108,7 @@ const ShoppingCart = () => {
                   </tbody>
                 </table>
               ) : (
-                <div class="alert alert-primary" role="alert">
+                <div className="alert alert-primary" role="alert">
                   No hay Productos en el carrito!!
                 </div>
               )}
@@ -125,10 +130,7 @@ const ShoppingCart = () => {
                   )} */}
                 </ul>
                 <ul>
-                  <button
-                    className="btn btn-success"
-                    onClick={() => finishSale()}
-                  >
+                  <button className="btn btn-success" onClick={() => finish()}>
                     Finalizar Compra
                   </button>
                 </ul>

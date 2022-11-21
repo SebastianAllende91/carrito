@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { PRODUCT } from "../../routes/paths";
+import imgDefault from "../../assets/images/b.webp";
 
 const CardItem = ({ article }) => {
   return (
@@ -8,7 +9,7 @@ const CardItem = ({ article }) => {
       <Link to={PRODUCT + `/${article.codArticulo}`}>
         <img
           className="img-fluid img-portfolio img-hover mb-3"
-          src={article.imagen}
+          src={article?.imagen ? article.imagen : imgDefault}
           alt={article.nombre}
         />
       </Link>
